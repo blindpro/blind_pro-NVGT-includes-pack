@@ -1,0 +1,131 @@
+//Fully pordable inventory class!
+class inventory
+{
+//The dictionary is where all the items are stored with there values. Order is the array of items to cykle threw.
+dictionary inv;
+string[] order;
+int index;
+//function to add a item.
+void add(string item, int number)
+{
+if(inv.exists(item) == true)
+{
+int num;
+inv.get(item,num);
+int total = num+number;
+inv.set(item,total);
+}
+else
+{
+inv.set(item,number);
+order.insert_last(item);
+}
+}
+//Function to remove items.
+void remove(string item, int number)
+{
+int num;
+if (!inv.exists(item))
+{
+return;
+	}
+inv.get(item,num);
+if( num-number<=0)
+{
+inv.delete(item);
+for(int i = 0; i<order.length(); i++)
+{
+if(order[i] == item)
+{
+order.remove_at(i);
+break;
+}
+}
+if (index >= order.length())
+{
+index = 0;
+}
+}
+else
+{
+inv.set(item,num-number);
+}
+}
+//This is the function to go threw your inventory.
+string cykle_forward()
+{
+if(order.length() == 0)
+{
+return "no items";
+}
+else if(index+1 >=order.length())
+{
+index = 0;
+return anounce_item();
+}
+else
+{
+index++;
+return anounce_item();
+}
+}
+//This is the function to go threw you inventory backwards.
+string cykle_backward()
+{
+if(order.length() == 0)
+{
+return "no items";
+}
+else if(index-1 <0)
+{
+int num = order.length()-1;
+index = num;
+return anounce_item();
+}
+else
+{
+index--;
+return anounce_item();
+}
+}
+//Speak currently selected item.
+string anounce_item()
+{
+int num;
+inv.get(order[index],num);
+return order[index]+" you have "+num+".";
+}
+//Use items and handle item lojic.
+void use(string item)
+{
+if(item == "")
+{
+speak("You can not use a nothing item, sorry.");
+}
+//Handle other items right here.
+}
+//Return the currently selected item as a string.
+string get_item_selection()
+{
+if(order.length() == 0)
+{
+return "";
+}
+else
+{
+return order[index];
+}
+}
+//Check if the user has a item in there inventory.
+bool hasThis(string item)
+{
+if(order.find(item) >-1)
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+}

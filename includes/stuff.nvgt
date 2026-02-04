@@ -1,0 +1,62 @@
+#pragma plugin nvgt_curl
+#include"sound_pool.nvgt"
+//sound pool object for the sound functions later in the code.
+sound_pool sounds;
+//This function is to speak some text. Not needed and must be commented out if audio form is being used.
+
+void speak(string text, bool interupt = true)
+{
+screen_reader_speak(text, interupt);
+}
+
+//This function plays a sound at a given pazition.
+void play(string name, int pazition, int spazition, bool loop)
+{
+sounds.play_1d(name, pazition, spazition, loop, false);
+}
+//This function plays a sound with out any panning.
+void splay(string name, bool loop = false)
+{
+sounds.play_stationary(name, loop, false);
+}
+//This function is used to download files. The downloaded file will be placed in the current working directory
+void download(string url, string filename, bool showWindow = true,bool unzip = false)
+{
+internet_request r(url, filename);
+if(showWindow)
+{
+show_window("downloader");
+}
+while(r.complete!=true)
+{
+wait(5);
+if(key_pressed(KEY_SPACE))
+{
+speak("download is at "+round(r.download_percent, 0)+" percent");
+}
+if(r.complete == true)
+{
+speak("download completed.");
+if(unzip == true)
+{
+unzipFile(filename);
+}
+}
+}
+}
+//This function is used to unzip files. This function needs the use of the unzip.bat file so make sure to point the function to the location of this file.
+void unzipFile(string filename)
+{
+run("lib/unzip.bat", filename , true, true);
+file_delete(filename);
+}
+//This functions splits a given string into its lines and returns it as a array.
+string[] @ lineSplit(string splitted)
+{
+return splitted.split("\r\n");
+}
+//This returns a string of the users computer info. Such as there OS or there OS build.
+string getCompInfo()
+{
+return "platform: "+PLATFORM+"\r\nplatform architecture: "+PLATFORM_ARCHITECTURE+"\r\nOS: "+PLATFORM_DISPLAY_NAME+"\r\nOS build: "+PLATFORM_VERSION+"\r\nprocessors: "+PROCESSOR_COUNT+"\r\nsystem name:"+system_node_name+"\r\nscript is running from path:"+cwdir();
+}

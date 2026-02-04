@@ -1,0 +1,71 @@
+//Fully pordable updater class!
+class updater
+{
+double currentVer ;
+string fileUrl;
+bool getChanges = false;
+string changesUrl;
+string changesFile;
+string fileName ;
+string versionUrl;
+http url;
+//This is a huge constructer. But this is where you set everything with in the class.
+updater(double v, string f, string n, string u, bool g, string cu, string cf)
+{
+currentVer = v;
+fileUrl = f;
+fileName = n;
+versionUrl = u;
+getChanges = g;
+changesUrl = cu;
+changesFile = cf;
+}
+updater(double v, string f, string n, string u)
+{
+//Second constructer that does not have support for downloading change log files.
+currentVer = v;
+fileUrl = f;
+fileName = n;
+versionUrl = u;
+}
+//Functions to check for updates.
+bool check()
+{
+if(url.get(versionUrl) == false)
+{
+alert("failed", "failed to get the latest version");
+return false;
+}
+url.wait();
+double version;
+string temp = url.response_body;
+version = parse_double(temp);
+if(version>currentVer)
+{
+return false;
+}
+else
+{
+speak("you are on the latest version");
+return true;
+}
+}
+//This is the function to download the update. This will download, unzip the update, then delete the old change files if there is one, then download the new one if you have it set to do that.
+void update()
+{
+alert("updater", "the new update will now be downloaded");
+download(fileUrl,fileName);
+if(fileName.ends_with(".zip") == true or fileName.ends_with(".7z") == true)
+{
+unzipFile(fileName);
+}
+if(getChanges == true)
+{
+if(file_exists(changesFile) == true)
+{
+file_delete(changesFile);
+}
+download(changesUrl, changesFile);
+}
+}
+}
