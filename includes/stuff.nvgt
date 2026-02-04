@@ -1,5 +1,6 @@
 #pragma plugin nvgt_curl
 #include"sound_pool.nvgt"
+tts_voice voice;
 //sound pool object for the sound functions later in the code.
 sound_pool sounds;
 //This function is to speak some text. Not needed and must be commented out if audio form is being used.
@@ -59,4 +60,12 @@ return splitted.split("\r\n");
 string getCompInfo()
 {
 return "platform: "+PLATFORM+"\r\nplatform architecture: "+PLATFORM_ARCHITECTURE+"\r\nOS: "+PLATFORM_DISPLAY_NAME+"\r\nOS build: "+PLATFORM_VERSION+"\r\nprocessors: "+PROCESSOR_COUNT+"\r\nsystem name:"+system_node_name+"\r\nscript is running from path:"+cwdir();
+}
+void speak_file(string filename, string text)
+{
+string data = voice.speak_to_memory(text);
+file spoke;
+spoke.open(filename+".wav","w");
+spoke.write(data);
+spoke.close();
 }
