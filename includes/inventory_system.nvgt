@@ -1,4 +1,5 @@
 //Fully pordable inventory class!
+#include"dget.nvgt"
 class inventory
 {
 //The dictionary is where all the items are stored with there values. Order is the array of items to cykle threw.
@@ -10,9 +11,7 @@ void add(string item, int number)
 {
 if(inv.exists(item) == true)
 {
-int num;
-inv.get(item,num);
-int total = num+number;
+int total = dgetn(inv,item)+number;
 inv.set(item,total);
 }
 else
@@ -24,12 +23,11 @@ order.insert_last(item);
 //Function to remove items.
 void remove(string item, int number)
 {
-int num;
 if (!inv.exists(item))
 {
 return;
-	}
-inv.get(item,num);
+}
+int num = dgetn(inv,item);
 if( num-number<=0)
 {
 inv.delete(item);
@@ -50,6 +48,11 @@ else
 {
 inv.set(item,num-number);
 }
+}
+int get_count(string item)
+{
+int num = dgetn(inv,item,-1);
+return num;
 }
 //This is the function to go threw your inventory.
 string cykle_forward()
@@ -91,8 +94,7 @@ return anounce_item();
 //Speak currently selected item.
 string anounce_item()
 {
-int num;
-inv.get(order[index],num);
+int num = 	dgetn(inv,order[index]);
 return order[index]+" you have "+num+".";
 }
 //Use items and handle item lojic.
@@ -126,6 +128,14 @@ return true;
 else
 {
 return false;
+}
+}
+void clear()
+{
+inv.delete_all();
+for(int i = 0; i<order.length(); i++)
+{
+order.remove_at(i);
 }
 }
 }
