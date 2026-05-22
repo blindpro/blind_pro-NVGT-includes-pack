@@ -1,4 +1,5 @@
-Inventory system documentation.
+# Inventory system documentation.
+
 This class is a inventory system that you can use in your games.
 You can cycle and use items with this class.
 I wrote this code for my bloodshed project, but it can work with anything.

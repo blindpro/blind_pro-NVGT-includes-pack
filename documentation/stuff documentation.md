@@ -1,4 +1,5 @@
-Stuff script
+# Stuff script
+
 This script contains a lot of helpful functions that you can use in your projects. I have used this include in all of my projects , so I like this one a lot.
 You will need the nvgt_curl plugin in your lib folder to use this script.
 I will go over each of the functions and describe them.

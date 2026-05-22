@@ -1,4 +1,5 @@
-Updater class.
+# Updater class.
+
 This class is a fully portable updater class that you can use in your games.
 You use it by creating a updater object, and setting what you need in the class in the constructer.
 This class has 2 constructers. One allows you to download change log files, the other is if you don't want that feature.
