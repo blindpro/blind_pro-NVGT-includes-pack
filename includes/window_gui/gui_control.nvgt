@@ -1,0 +1,41 @@
+funcdef void action();
+class gui_control
+{
+string[] items;
+int maximum_items = 0;
+bool multiselect = false;
+bool repeat_boundary_items = false;
+string text;
+string default_text;
+string mask;
+int maximum_length = 0;
+bool read_only = false;
+bool multiline = false;
+bool multiline_enter = true;
+bool chect = false;
+bool primary = false;
+bool cansel = false;
+string name;
+int type;
+action@ callback;
+int id;
+gui_control(string name, int type, int id,bool primary = false,bool cansel = false,action@func = null)
+{
+this.name = name;
+this.type = type;
+@callback = @func;
+this.id = id;
+this.primary = primary;
+this.cansel = cansel;
+}
+gui_control()
+{
+this.type = -1;
+this.id = -1;
+@callback = null;
+}
+int get_id()
+{
+return id;
+}
+}
