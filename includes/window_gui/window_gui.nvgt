@@ -55,6 +55,14 @@ void set_state(string control, bool enabled, bool visible)
 {
 form.set_state(get_id(control), enabled, visible);
 }
+void hide_control(string control)
+{
+form.set_state(get_id(control),false,false);
+}
+void show_control(string control)
+{
+form.set_state(get_id(control),true,true);
+}
 void focus(string name)
 {
 form.focus(get_id(name));
