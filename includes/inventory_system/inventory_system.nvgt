@@ -16,7 +16,7 @@ if(i is null or number <=0)
 return;
 }
 invintory_stack@ stack;
-if(stacks.get(i.name,stack))
+if(stacks.get(i.name,@stack))
 {
 stack.count+=number;
 return;
@@ -38,7 +38,7 @@ if (!stacks.exists(item))
 {
 return;
 }
-stacks.get(item,stack);
+stacks.get(item,@stack);
 stack.count-=number;
 if(stack.count<=0)
 {
@@ -55,7 +55,7 @@ index = 0;
 }
 else
 {
-stacks.set(item,stack);
+stacks.set(item,@stack);
 }
 }
 void remove(invintory_item@ i, int number)
@@ -117,7 +117,7 @@ return anounce_item();
 string anounce_item()
 {
 invintory_stack@ stack;
-stacks.get(order[index],stack);
+stacks.get(order[index],@stack);
 int num = stack.count;
 return order[index]+" you have "+num+".";
 }
@@ -129,14 +129,18 @@ if(i is null)
 {
 return;
 }
-stacks.get(i.name,stack);
+stacks.get(i.name,@stack);
 stack.i.use();
 }
 void use(string item)
 {
 invintory_stack@ stack;
-stacks.get(item,stack);
-if(stack is null)
+if(!stacks.exists(item))
+{
+return;
+}
+stacks.get(item,@stack);
+if(stack.i is null)
 {
 return;
 }
