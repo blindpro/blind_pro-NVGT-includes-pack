@@ -8,4 +8,9 @@ invintory_item(string name, item_action@a)
 this.name = name;
 @use = @a;
 }
+invintory_item()
+{
+name = "none";
+@use = null;
+}
 }

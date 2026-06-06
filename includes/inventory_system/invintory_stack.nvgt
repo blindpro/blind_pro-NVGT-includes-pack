@@ -1,0 +1,14 @@
+class invintory_stack
+{
+invintory_item i;
+int count;
+invintory_stack(invintory_item i, int count)
+{
+this.i = i;
+this.count = count;
+}
+invintory_stack()
+{
+count = -1;
+}
+}
