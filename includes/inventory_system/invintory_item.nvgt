@@ -1,9 +1,9 @@
 funcdef void item_action();
-class item
+class invintory_item
 {
 string name;
 item_action@use;
-item(string name, item_action@a)
+invintory_item(string name, item_action@a)
 {
 this.name = name;
 @use = @a;
