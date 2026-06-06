@@ -1,0 +1,11 @@
+funcdef void item_action();
+class item
+{
+string name;
+item_action@use;
+item(string name, item_action@a)
+{
+this.name = name;
+@use = @a;
+}
+}
