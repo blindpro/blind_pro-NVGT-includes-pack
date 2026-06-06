@@ -1,8 +1,0 @@
-namespace helpers
-{
-void close()
-{
-speak("exiting");
-exit();
-}
-}
