@@ -1,0 +1,25 @@
+class console_manager
+{
+string[] args;
+console_manager()
+{
+parse_args();
+}
+bool has_args()
+{
+return COMMAND_LINE != "";
+}
+void output(string text)
+{
+screen_reader_output(text);
+}
+void error(string text)
+{
+output("error. "+text);
+}
+string[] parse_args()
+{
+args = COMMAND_LINE.split(" ");
+return args;
+}
+}
