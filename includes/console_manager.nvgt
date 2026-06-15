@@ -11,11 +11,15 @@ return COMMAND_LINE != "";
 }
 void output(string text)
 {
-screen_reader_output(text);
+cout<<text;
 }
 void error(string text)
 {
-output("error. "+text);
+cout<<"error. "+text;
+}
+string get_input()
+{
+return cin.read_line().trim_whitespace();
 }
 string[] parse_args()
 {
