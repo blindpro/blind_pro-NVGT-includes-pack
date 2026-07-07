@@ -1,0 +1,100 @@
+#include"settings.nvgt"
+class basic_settings
+{
+settings s;
+string company;
+string product;
+basic_settings(string company, string product,bool encrypt = false, string key = "")
+{
+this.company = company;
+this.product = product;
+if(encrypt)
+{
+s.set_encryption(key);
+}
+}
+void set_double(string key, double value)
+{
+open();
+s.write_number(key,value);
+close();
+}
+double get_double(string key,double def = 0)
+{
+open();
+double num = s.read_number(key,def);
+close();
+return num;
+}
+void set_gratest_double(string key, double value)
+{
+open();
+double num = s.read_number(key);
+if(value>num)
+{
+s.write_number(key,value);
+}
+close();
+}
+void set_least_double(string key, double value)
+{
+open();
+double num = s.read_number(key);
+if(value<num)
+{
+s.write_number(key,value);
+}
+}
+void set_string(string key, string value)
+{
+open();
+s.write_string(key,value);
+close();
+}
+string get_string(string key, string def = "")
+{
+open();
+string value = s.read_string(key,def);
+close();
+return value;
+}
+void set_bool(string key, bool value)
+{
+open();
+s.write_bool(key,value);
+close();
+}
+void toggle(string key)
+{
+open();
+if(s.exists(key))
+{
+bool value = get_bool(key);
+if(value == true)
+{
+s.write_bool(key,false);
+}
+else
+{
+s.write_bool(key,true);
+}
+}
+close();
+}
+
+bool get_bool(string key, bool def = false)
+{
+open();
+bool value = s.read_bool(key,def);
+close();
+return value;
+}
+void open()
+{
+s.setup(company,product,false);
+}
+void close()
+{
+s.close();
+}
+}
